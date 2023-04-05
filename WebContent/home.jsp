@@ -13,7 +13,7 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
 <title>Enjoy Trip</title>
-<meta content="" name="description" />
+<meta content="" name="description" /> 	
 <meta content="" name="keywords" />
 <!-- ajax를 위해 jquery 사용 -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>

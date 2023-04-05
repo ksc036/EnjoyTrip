@@ -42,4 +42,9 @@ public class TripServiceImpl implements TripService {
 		return tripDao.searchNearByResDao(swLa,swLo,neLa,neLo);
 	}
 
+	@Override
+	public List<TripDto> searchNearByHotPlaceService(String swLa, String swLo, String neLa, String neLo) throws Exception {
+		return tripDao.searchNearByHotPlaceDao(swLa,swLo,neLa,neLo);
+	}
+
 }

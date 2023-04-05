@@ -13,4 +13,5 @@ public interface TripDao {
 	TripDto viewDetailDao(String content_id) throws SQLException;
 	List<TripDto> searchTripDao(String keyword, String content_type_id, String sido_code) throws SQLException;
 	List<TripDto> searchNearByResDao(String swLa, String swLo, String neLa, String neLo) throws SQLException;
+	List<TripDto> searchNearByHotPlaceDao(String swLa, String swLo, String neLa, String neLo) throws SQLException;
 }

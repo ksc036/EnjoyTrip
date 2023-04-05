@@ -11,4 +11,5 @@ public interface TripService {
 	TripDto viewDetailService(String content_id) throws Exception;
 	List<TripDto> searchTripService(String keyword, String content_type_id, String sido_code) throws Exception;
 	List<TripDto> searchNearByResService(String swLa, String swLo, String neLa, String neLo) throws Exception;
+	List<TripDto> searchNearByHotPlaceService(String swLa, String swLo, String neLa, String neLo) throws Exception;
 }

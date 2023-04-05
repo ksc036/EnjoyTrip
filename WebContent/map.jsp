@@ -268,9 +268,10 @@
 			<input type="text"><i class="bi bi-airplane"></i>
 			<div style="display: flex; justify-content: space-around;">
 				<button id="searchBtn" type="button"
-					class="btn btn-primary toggleInBtn" num="0">HOTPlace</button>
+					class="btn btn-danger toggleInBtn" num="0">HOTPlace</button>
+
 				<button id="likeBtn" type="button"
-					class="btn btn-primary toggleInBtn" num="1">좋아요</button>
+					class="btn btn-danger toggleInBtn" num="1">좋아요</button>
 				<button id="routeBtn" type="button"
 					class="btn btn-primary toggleInBtn" num="2">경로짜기</button>
 				<button id="foodBtn" type="button"
@@ -284,7 +285,10 @@
 		<div class="offcanvas-body">
 
 			<div id="searchGroup" class="list-group toggleInGroup"
-				style="display: none;" num="0">search</div>
+				style="display: none;" num="0">
+				<button id="searchNearByHotPlace" type="button" num="0">실시간 주변 핫플 검색</button>
+				<div id="HotPlaceLst"></div>
+			</div>
 
 
 			<div id="likeGroup" class="list-group toggleInGroup"
@@ -295,7 +299,7 @@
 
 			<div id="foodGroup" class="list-group toggleInGroup"
 				style="display: none;" num="3">
-				<button id="searchNearByRes" type="button">주변 음식점 검색</button>
+				<button num="3" id="searchNearByRes" type="button">주변 음식점 검색</button>
 				<div id="foodGroupLst"></div>
 			</div>
 

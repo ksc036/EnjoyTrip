@@ -60,9 +60,41 @@ public class TripController extends HttpServlet {
 			forward(request, response, path);
 		} else if ("searchNearByRes".equals(action)) {
 			out.print(searchNearByRes(request, response));
+		}else if ("searchNearByHotPlace".equals(action)) {
+			out.print(searchNearByHotPlace(request, response));
 		}else {
 			redirect(request, response, path);
 		}
+	}
+
+	private String searchNearByHotPlace(HttpServletRequest request, HttpServletResponse response) {
+		String swLa = request.getParameter("swLa");
+		String swLo = request.getParameter("swLo");
+		String neLa = request.getParameter("neLa");
+		String neLo = request.getParameter("neLo");
+		
+		JSONObject items = new JSONObject();
+		JSONArray jsonarr = new JSONArray();
+		JSONObject jsonObj = new JSONObject();
+		try {
+			List<TripDto> lst = tripService.searchNearByHotPlaceService(swLa,swLo,neLa,neLo);
+			for (TripDto tripDto : lst) {
+				jsonObj = new JSONObject();
+				jsonObj.put("latitude",tripDto.getLatitude());
+				jsonObj.put("longitude",tripDto.getLongitude());
+				jsonObj.put("firstimage", tripDto.getFirstimage());
+				jsonObj.put("firstimage2", tripDto.getFirstimage2());
+				jsonObj.put("contentid", tripDto.getContentid());
+				jsonObj.put("title", tripDto.getTitle());
+				jsonObj.put("tel", tripDto.getTel());
+				jsonarr.add(jsonObj);
+			}
+			items.put("items", jsonarr);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return items.toString();
 	}
 
 	private String searchNearByRes(HttpServletRequest request, HttpServletResponse response) {
