@@ -47,7 +47,7 @@
 		<span id="loginoutcheck"> <a href="${root}/user?action=logout" id="logoutbtn" onclick="alert('로그아웃')">LOGOUT</a>
 		</span>
 		<div>
-			<a class="nav-link disabled float-right"><strong>${userInfo.username}</strong>님</a>
+			<a class="nav-link disabled float-right" style="margin-left :  140px"><strong>${userInfo.username}</strong>님</a>
 		</div>
 		</div>
 		<i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
