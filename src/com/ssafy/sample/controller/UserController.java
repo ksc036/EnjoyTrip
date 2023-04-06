@@ -2,6 +2,7 @@ package com.ssafy.sample.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+
 
 import com.ssafy.sample.model.UserDto;
 import com.ssafy.sample.service.UserService;
@@ -34,16 +37,24 @@ public class UserController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		response.setContentType("application/x-json; charset=UTF-8");
+
 		String action = request.getParameter("action");
 		String path = "";
 		if ("login".equals(action)) {
 			response.getWriter().write(login(request, response));
+			
+		}else if ("gugun_map".equals(action)) {
+			
+			response.getWriter().write(gugun_map(request, response));
+			
 		} else if ("logout".equals(action)) {
 			path = logout(request, response);
 			redirect(request, response, path);
 		} else if ("mvjoin".equals(action)) {
-			path = "/join.jsp";
-			redirect(request, response, path);
+			path = mvjoin(request, response);
+			forward(request, response, path);
 		} else if ("join".equals(action)) {
 			path = join(request, response);
 			redirect(request, response, path);
@@ -74,6 +85,18 @@ public class UserController extends HttpServlet {
 
 	}
 	
+	private String gugun_map(HttpServletRequest request, HttpServletResponse response) {
+		int sido_code = Integer.parseInt(request.getParameter("sido_code"));
+		try {
+			String str  = userService.gugun_map(sido_code);
+			return str;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "fail";
+		}
+
+	}
+	
 	private String idcheck(HttpServletRequest request, HttpServletResponse response) {
 		String email = request.getParameter("email");
 		
@@ -94,9 +117,12 @@ public class UserController extends HttpServlet {
 		userDto.setEmail(request.getParameter("join-email"));
 		userDto.setPassword(request.getParameter("join-password"));
 		userDto.setNickname(request.getParameter("nickname"));
-		userDto.setAddress(request.getParameter("address"));
-		userDto.setAddress2(request.getParameter("address2"));
 		userDto.setUsername(request.getParameter("username"));
+		userDto.setSido_code(Integer.parseInt(request.getParameter("sido_code")));
+		userDto.setGugun_code(Integer.parseInt(request.getParameter("gugun_code")));
+		userDto.setAddress(request.getParameter("address"));
+		
+		
 		try {
 			userService.join(userDto);
 			return "/home.jsp";
@@ -106,6 +132,19 @@ public class UserController extends HttpServlet {
 		}
 
 	}
+	
+	private String mvjoin(HttpServletRequest request, HttpServletResponse response) {
+		
+		try {
+			request.setAttribute("sido_map", userService.sido_map());
+			return "/join.jsp";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "/error/error.jsp";
+		}
+
+	} 	
+	
 
 	private String logout(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();

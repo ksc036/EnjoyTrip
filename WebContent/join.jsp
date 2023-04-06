@@ -137,7 +137,12 @@
    <div class="row php-email-form">
   <div class="col-md-6 mb-3 sel">
   시/도:
-   <select name='sido_code'class="form-select" required> 
+   <select id = "sido_select" name='sido_code'class="form-select" required>
+   <option value=''>시/도 선택</option> 
+   <c:forEach var = "i" items="${sido_map}">
+   <option value=${i.key}>${i.value}</option>
+   </c:forEach>
+   
     </select>
         <div class="invalid-feedback ">
       주소(시/도)를 골라주세요.
@@ -166,7 +171,7 @@
 
     <div class="mb-3 php-email-form">
         <label for="address2">상세주소<span class="text-muted">&nbsp;(필수 아님)</span></label>
-        <input type="text" class="form-control" id="address2" name = "address2" placeholder="상세주소를 입력해주세요.">
+        <input type="text" class="form-control" id="address2" name = "address" placeholder="상세주소를 입력해주세요.">
     </div>
 
 

@@ -357,5 +357,3 @@ function displayMarker(place,markers) {
 	    infowindow.open(map, marker);
 	}
 //	#3. 카카오맵에서 검색결과 가져오기 End
-
- 

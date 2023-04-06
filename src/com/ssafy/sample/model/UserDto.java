@@ -5,8 +5,36 @@ public class UserDto {
 	private String nickname;
 	private String email;
 	private String password;
+	private int sido_code;
+	private int gugun_code;
 	private String address;
-	private String address2;
+	private int userNo;
+	
+	public int getUserNo() {
+		return userNo;
+	}
+	public void setUserNo(int userNo) {
+		this.userNo = userNo;
+	}
+	public int getSido_code() {
+		return sido_code;
+	}
+	public void setSido_code(int sido_code) {
+		this.sido_code = sido_code;
+	}
+	public int getGugun_code() {
+		return gugun_code;
+	}
+	public void setGugun_code(int gugun_code) {
+		this.gugun_code = gugun_code;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	
 	
 	public String getUsername() {
 		return username;
@@ -32,24 +60,8 @@ public class UserDto {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
-	}
-	public String getAddress2() {
-		return address2;
-	}
-	public void setAddress2(String address2) {
-		this.address2 = address2;
-	}
-	@Override
-	public String toString() {
-		return "UserDto [name=" + username + ", nickname=" + nickname + ", email=" + email + ", password=" + password
-				+ ", address=" + address + ", address2=" + address2 + "]";
-	}
-	
+
+
 	
 	
 }

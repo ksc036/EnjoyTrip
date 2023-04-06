@@ -76,7 +76,6 @@ function makeList(data) {
 		              <img style="max-height: 280px; width : 100%" src="${img}" class="img-fluid" alt="" />
 		              <div class="gallery-links d-flex align-items-end justify-content-between">
 		                <span class="align-self-start mt-5 ms-5">${trip.title}</span>
-
 		                <div class="me-5 mb-5">
 		                  <a href="./trip?action=goMap&latitude=${trip.latitude}&longitude=${trip.longitude}&title=${trip.title}" target="_blank" title="Gallery 1" class="glightbox preview-link"><i
 		                      class="bi bi-geo-alt-fill"></i>

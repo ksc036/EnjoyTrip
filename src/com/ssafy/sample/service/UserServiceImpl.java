@@ -1,11 +1,14 @@
 package com.ssafy.sample.service;
 
-import java.sql.SQLException;
+import java.util.Map;
 import java.util.regex.Pattern;
+
+import org.json.simple.JSONObject;
 
 import com.ssafy.sample.dao.UserDao;
 import com.ssafy.sample.dao.UserDaoImpl;
 import com.ssafy.sample.model.UserDto;
+
 
 public class UserServiceImpl implements UserService {
 
@@ -44,6 +47,17 @@ public class UserServiceImpl implements UserService {
 			return false ;
 		}
 
+	}
+
+	@Override
+	public Map<Integer, String> sido_map() throws Exception {
+		return userDao.sido_map();
+	}
+	
+	@Override
+	public String gugun_map(int sido_code) throws Exception {
+		JSONObject jsonObject = new JSONObject(userDao.gugun_map( sido_code));
+		return jsonObject.toJSONString();
 	}
 
 }

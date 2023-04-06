@@ -92,8 +92,6 @@ public class BoardController extends HttpServlet {
 	}
 
 	private String list(HttpServletRequest request, HttpServletResponse response) {
-		HttpSession session = request.getSession();
-		UserDto userDto = (UserDto) session.getAttribute("userInfo");
 		
 			try {
 				Map<String, String> map = new HashMap<String, String>();
