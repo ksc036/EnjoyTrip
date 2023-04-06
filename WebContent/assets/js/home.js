@@ -15,7 +15,6 @@ function makeOption(data) {
 
 // 사진칼럼만들 태그
 let pictureLst = document.getElementById("pictureLst");
-
 // 랜덤으로 게시글 가져오는 코드
 fetch("./trip?action=loadRandomInfo", { method: "GET" })
   .then((response) => response.json())

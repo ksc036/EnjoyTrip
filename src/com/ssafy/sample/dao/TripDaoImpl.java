@@ -211,7 +211,7 @@ public class TripDaoImpl implements TripDao {
 		try {
 			conn = dbUtil.getConnection();
 			StringBuilder sql = new StringBuilder(
-					" select * from attraction_info where longitude between ? and ? and  latitude between ? and ? order by readcount limit 10 ");
+					" select * from attraction_info where longitude between ? and ? and  latitude between ? and ? order by readcount desc limit 10 ");
 			pstmt = conn.prepareStatement(sql.toString());
 			pstmt.setString(1, swLo);
 			pstmt.setString(2, neLo);

@@ -89,7 +89,61 @@
 #centerAddr, .title, bAddr>div {
 	color: black;
 }
+/* css 넣기 start */
+.map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
+.map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
+
+#menu_wrap {position:absolute;top:0;right:0;bottom:0;width:250px;margin-top : 100px ;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
+.bg_white {background:#fff;}
+#menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}
+#menu_wrap .option{text-align: center;}
+#menu_wrap .option p {margin:10px 0;}  
+#menu_wrap .option button {margin-left:5px;}
+
+#placesList li {list-style: none;}
+#placesList .item {position:relative;border-bottom:1px solid #888;overflow: hidden;cursor: pointer;min-height: 65px;}
+#placesList .item span {display: block;margin-top:4px;}
+#placesList .item h5, #placesList .item .info {text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
+#placesList .item .info{padding:10px 0 10px 55px;}
+#placesList .info .gray {color:#8a8a8a;}
+#placesList .info .jibun {padding-left:26px;background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png) no-repeat;}
+#placesList .info .tel {color:#009900;}
+
+#placesList li {list-style: none;}
+#placesList .item {position:relative;border-bottom:1px solid #888;overflow: hidden;cursor: pointer;min-height: 65px;}
+#placesList .item span {display: block;margin-top:4px;}
+#placesList .item h5, #placesList .item .info {text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
+#placesList .item .info{padding:10px 0 10px 55px;}
+#placesList .info .gray {color:#8a8a8a;}
+#placesList .info .jibun {padding-left:26px;background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png) no-repeat;}
+#placesList .info .tel {color:#009900;}
+#placesList .item .markerbg {float:left;position:absolute;width:36px; height:37px;margin:10px 0 0 10px;background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png) no-repeat;}
+#placesList .item .marker_1 {background-position: 0 -10px;}
+#placesList .item .marker_2 {background-position: 0 -56px;}
+#placesList .item .marker_3 {background-position: 0 -102px}
+#placesList .item .marker_4 {background-position: 0 -148px;}
+#placesList .item .marker_5 {background-position: 0 -194px;}
+#placesList .item .marker_6 {background-position: 0 -240px;}
+#placesList .item .marker_7 {background-position: 0 -286px;}
+#placesList .item .marker_8 {background-position: 0 -332px;}
+#placesList .item .marker_9 {background-position: 0 -378px;}
+#placesList .item .marker_10 {background-position: 0 -423px;}
+#placesList .item .marker_11 {background-position: 0 -470px;}
+#placesList .item .marker_12 {background-position: 0 -516px;}
+#placesList .item .marker_13 {background-position: 0 -562px;}
+#placesList .item .marker_14 {background-position: 0 -608px;}
+#placesList .item .marker_15 {background-position: 0 -654px;}
+#pagination {margin:10px auto;text-align: center;}
+#pagination a {display:inline-block;margin-right:10px;}
+#pagination .on {font-weight: bold; cursor: default;color:#777;}
+
+#menu_wrap ul >*{
+	color: black;
+}
 </style>
+
+
+
 </head>
 
 <body>
@@ -107,6 +161,14 @@
 		<div class="hAddr">
 			<span class="title">지도중심기준 행정동 주소정보</span> <span id="centerAddr"></span>
 		</div>
+		<!-- 검색리스트 start -->
+		<hr>
+		<div id="menu_wrap">
+		<ul id="placesList"></ul>
+		<div id="pagination"></div>
+		</div>
+		<!-- 검색리스트end -->
+
 	</div>
 	<!-- Map띄우기 END -->
 
@@ -254,7 +316,7 @@
 
 	<button class="btn btn-secondary btn-sm" data-bs-toggle="offcanvas"
 		data-bs-target="#offcanvasScrolling" id="test"
-		style="position: fixed; top: 50%; left: 0; z-index: 2;">></button>
+		style="position: fixed; top: 50%; left: 10; z-index: 2;">></button>
 	<!-- Map Script End -->
 
 	<!-- 토글창 start-->
@@ -265,7 +327,7 @@
 		<!-- 토글 헤더 Start -->
 		<div style="background-color: #666666; height: 150px;">
 			<h1 class="fw-bold">Enjoy Trip</h1>
-			<input type="text"><i class="bi bi-airplane"></i>
+			<input id= "keyword" type="text"><button onClick="searchPlaces();"> <i class="bi bi-airplane"></i></button>
 			<div style="display: flex; justify-content: space-around;">
 				<button id="searchBtn" type="button"
 					class="btn btn-danger toggleInBtn" num="0">HOTPlace</button>
@@ -286,7 +348,8 @@
 
 			<div id="searchGroup" class="list-group toggleInGroup"
 				style="display: none;" num="0">
-				<button id="searchNearByHotPlace" type="button" num="0">실시간 주변 핫플 검색</button>
+				<button id="searchNearByHotPlace" type="button" num="0">실시간
+					주변 핫플 검색</button>
 				<div id="HotPlaceLst"></div>
 			</div>
 
@@ -299,7 +362,8 @@
 
 			<div id="foodGroup" class="list-group toggleInGroup"
 				style="display: none;" num="3">
-				<button num="3" id="searchNearByRes" type="button">주변 음식점 검색</button>
+				<button num="3" id="searchNearByRes" type="button">주변 음식점
+					검색</button>
 				<div id="foodGroupLst"></div>
 			</div>
 
