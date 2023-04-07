@@ -151,14 +151,6 @@
 		<div class="hAddr">
 			<span class="title">지도중심기준 행정동 주소정보</span> <span id="centerAddr"></span>
 		</div>
-		<!-- 검색리스트 start -->
-		<hr>
-		<div id="menu_wrap">
-		<ul id="placesList"></ul>
-		<div id="pagination"></div>
-		</div>
-		<!-- 검색리스트end -->
-
 	</div>
 	<!-- Map띄우기 END -->
 
@@ -347,7 +339,7 @@
 
 	</div>
 	<!-- 토글창 end -->
-
+`
 
 
 	<!-- ======= Footer ======= -->

@@ -55,4 +55,9 @@ public class TripServiceImpl implements TripService {
 		return tripDao.loadRandomInfoUseUserDao(sido_code, gugun_code);
 	}
 
+	@Override
+	public List<TripDto> searchByKeyWordInMapService(String keyword) throws Exception {
+		return tripDao.searchByKeyWordInMapDao(keyword);
+	}
+
 }

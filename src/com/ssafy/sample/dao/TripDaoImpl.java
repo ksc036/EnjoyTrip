@@ -275,4 +275,40 @@ public class TripDaoImpl implements TripDao {
 		}
 		return list;
 	}
+
+	@Override
+	public List<TripDto> searchByKeyWordInMapDao(String keyword) throws SQLException {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<TripDto> list = new ArrayList<>();
+
+		try {
+			conn = dbUtil.getConnection();
+			StringBuilder sql = new StringBuilder(
+					"select * from attraction_info where title like ? order by readcount desc limit 5;");
+			pstmt = conn.prepareStatement(sql.toString());
+			pstmt.setString(1, "%"+keyword+"%");
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				TripDto tripDto = new TripDto();
+				tripDto.setLatitude(rs.getString("latitude"));
+				tripDto.setLongitude(rs.getString("longitude"));
+
+				tripDto.setContentid(rs.getString("content_id"));
+				tripDto.setContenttypeid(rs.getString("content_type_id"));
+				tripDto.setTitle(rs.getString("title"));
+				tripDto.setAddr1(rs.getString("addr1"));
+				tripDto.setAddr2(rs.getString("addr2"));
+				tripDto.setTel(rs.getString("tel"));
+				tripDto.setFirstimage(rs.getString("first_image"));
+				tripDto.setFirstimage2(rs.getString("first_image2"));
+				list.add(tripDto);
+			}
+		} finally {
+			dbUtil.close(pstmt, rs, conn);
+		}
+		return list;
+	}
 }

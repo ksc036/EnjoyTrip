@@ -18,5 +18,7 @@ public interface TripService {
 
 	List<TripDto> searchNearByHotPlaceService(String swLa, String swLo, String neLa, String neLo) throws Exception;
 
-	List<TripDto> loadRandomInfoUseUserService(String sido_code, String gugun_code) throws Exception;;
+	List<TripDto> loadRandomInfoUseUserService(String sido_code, String gugun_code) throws Exception;
+
+	List<TripDto> searchByKeyWordInMapService(String keyword)throws Exception;
 }

@@ -64,9 +64,37 @@ public class TripController extends HttpServlet {
 			out.print(searchNearByRes(request, response));
 		}else if ("searchNearByHotPlace".equals(action)) {
 			out.print(searchNearByHotPlace(request, response));
+		}else if ("searchByKeyWordInMap".equals(action)) {
+			out.print(searchByKeyWordInMap(request, response));
 		}else {
 			redirect(request, response, path);
 		}
+	}
+
+	private String searchByKeyWordInMap(HttpServletRequest request, HttpServletResponse response) {
+		String keyword = request.getParameter("keyword");
+		
+		JSONObject items = new JSONObject();
+		JSONArray jsonarr = new JSONArray();
+		JSONObject jsonObj = new JSONObject();
+		try {
+			List<TripDto> lst = tripService.searchByKeyWordInMapService(keyword);
+			for (TripDto tripDto : lst) {
+				jsonObj = new JSONObject();
+				jsonObj.put("latitude",tripDto.getLatitude());
+				jsonObj.put("longitude",tripDto.getLongitude());
+				jsonObj.put("firstimage", tripDto.getFirstimage());
+				jsonObj.put("firstimage2", tripDto.getFirstimage2());
+				jsonObj.put("contentid", tripDto.getContentid());
+				jsonObj.put("title", tripDto.getTitle());
+				jsonObj.put("tel", tripDto.getTel());
+				jsonarr.add(jsonObj);
+			}
+			items.put("items", jsonarr);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return items.toString();
 	}
 
 	private String loadRandomInfoUseUser(HttpServletRequest request, HttpServletResponse response) {
