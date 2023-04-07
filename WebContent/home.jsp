@@ -221,6 +221,26 @@
 	<script src="assets/js/home.js"></script>
 	<script src="assets/js/common.js"></script>
 
+	<script>
+	<c:if test="${userInfo == null}">
+	fetch("./trip?action=loadRandomInfo", { method: "GET" })
+	  .then((response) => response.json())
+	  .then((data) => {
+	    makeList(data);
+	  });
+	</c:if>
+	
+	<c:if test="${userInfo != null}">
+	console.log("${userInfo.sido_code}");
+	console.log("${userInfo.gugun_code}");
+	fetch("./trip?action=loadRandomInfoUseUser&sido_code=${userInfo.sido_code}&gugun_code=${userInfo.gugun_code}", { method: "GET" })
+	  .then((response) => response.json())
+	  .then((data) => {
+	    makeList(data);
+	  }); 
+	</c:if>
+	
+	</script>
 
 
 </body>

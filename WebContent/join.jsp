@@ -116,14 +116,6 @@ z<%@ page language="java" contentType="text/html; charset=UTF-8"
         </div>
     </div>
 
-
-
-
-
-
-
-
-
     <div class="mb-3 php-email-form">
         <label for="passward">비밀번호</label>
         <input type="password" class="form-control" id="join-passward" name = "join-password" placeholder="******" required />
@@ -131,8 +123,6 @@ z<%@ page language="java" contentType="text/html; charset=UTF-8"
             비밀번호를 입력해주세요.
         </div>
     </div>
-
-
 
    <div class="row php-email-form">
   <div class="col-md-6 mb-3 sel">

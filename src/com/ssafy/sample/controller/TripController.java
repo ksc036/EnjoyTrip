@@ -49,6 +49,8 @@ public class TripController extends HttpServlet {
 		System.out.println(action);
 		if ("loadLocation".equals(action)) {
 			out.print(loadLocation(request, response));
+		}else if ("loadRandomInfoUseUser".equals(action)) {
+			out.print(loadRandomInfoUseUser(request, response));
 		} else if ("loadRandomInfo".equals(action)) {
 			out.print(loadRandomInfo(request, response));
 		} else if ("viewDetail".equals(action)) {
@@ -65,6 +67,33 @@ public class TripController extends HttpServlet {
 		}else {
 			redirect(request, response, path);
 		}
+	}
+
+	private String loadRandomInfoUseUser(HttpServletRequest request, HttpServletResponse response) {
+		String sido_code = request.getParameter("sido_code");
+		String gugun_code = request.getParameter("gugun_code");
+		
+		JSONObject items = new JSONObject();
+		JSONArray jsonarr = new JSONArray();
+		JSONObject jsonObj = new JSONObject();
+		try {
+			List<TripDto> lst = tripService.loadRandomInfoUseUserService(sido_code,gugun_code);
+			for (TripDto tripDto : lst) {
+				jsonObj = new JSONObject();
+				jsonObj.put("latitude",tripDto.getLatitude());
+				jsonObj.put("longitude",tripDto.getLongitude());
+				jsonObj.put("firstimage", tripDto.getFirstimage());
+				jsonObj.put("firstimage2", tripDto.getFirstimage2());
+				jsonObj.put("contentid", tripDto.getContentid());
+				jsonObj.put("title", tripDto.getTitle());
+				jsonObj.put("tel", tripDto.getTel());
+				jsonarr.add(jsonObj);
+			}
+			items.put("items", jsonarr);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return items.toString();
 	}
 
 	private String searchNearByHotPlace(HttpServletRequest request, HttpServletResponse response) {

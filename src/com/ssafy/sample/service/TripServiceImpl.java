@@ -8,11 +8,13 @@ import com.ssafy.sample.model.TripDto;
 
 public class TripServiceImpl implements TripService {
 	private TripDao tripDao;
-	
+
 	private TripServiceImpl() {
 		tripDao = TripDaoImpl.getTripDao();
 	}
-	private static TripService tripSerivce= new TripServiceImpl(); 
+
+	private static TripService tripSerivce = new TripServiceImpl();
+
 	public static TripService getTripSerivce() {
 		return tripSerivce;
 	}
@@ -39,12 +41,18 @@ public class TripServiceImpl implements TripService {
 
 	@Override
 	public List<TripDto> searchNearByResService(String swLa, String swLo, String neLa, String neLo) throws Exception {
-		return tripDao.searchNearByResDao(swLa,swLo,neLa,neLo);
+		return tripDao.searchNearByResDao(swLa, swLo, neLa, neLo);
 	}
 
 	@Override
-	public List<TripDto> searchNearByHotPlaceService(String swLa, String swLo, String neLa, String neLo) throws Exception {
-		return tripDao.searchNearByHotPlaceDao(swLa,swLo,neLa,neLo);
+	public List<TripDto> searchNearByHotPlaceService(String swLa, String swLo, String neLa, String neLo)
+			throws Exception {
+		return tripDao.searchNearByHotPlaceDao(swLa, swLo, neLa, neLo);
+	}
+
+	@Override
+	public List<TripDto> loadRandomInfoUseUserService(String sido_code, String gugun_code) throws Exception {
+		return tripDao.loadRandomInfoUseUserDao(sido_code, gugun_code);
 	}
 
 }

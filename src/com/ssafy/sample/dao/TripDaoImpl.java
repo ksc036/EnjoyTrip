@@ -172,7 +172,7 @@ public class TripDaoImpl implements TripDao {
 		try {
 			conn = dbUtil.getConnection();
 			StringBuilder sql = new StringBuilder(
-					" select * from attraction_info where longitude between ? and ? and  latitude between ? and ? and content_type_id = 39");
+					" select * from attraction_info where longitude between ? and ? and  latitude between ? and ? and content_type_id = 39 order by readcount desc limit 10");
 			pstmt = conn.prepareStatement(sql.toString());
 			pstmt.setString(1, swLo);
 			pstmt.setString(2, neLo);
@@ -223,6 +223,43 @@ public class TripDaoImpl implements TripDao {
 				TripDto tripDto = new TripDto();
 				tripDto.setLatitude(rs.getString("latitude"));
 				tripDto.setLongitude(rs.getString("longitude"));
+				tripDto.setContentid(rs.getString("content_id"));
+				tripDto.setContenttypeid(rs.getString("content_type_id"));
+				tripDto.setTitle(rs.getString("title"));
+				tripDto.setAddr1(rs.getString("addr1"));
+				tripDto.setAddr2(rs.getString("addr2"));
+				tripDto.setTel(rs.getString("tel"));
+				tripDto.setFirstimage(rs.getString("first_image"));
+				tripDto.setFirstimage2(rs.getString("first_image2"));
+				list.add(tripDto);
+			}
+		} finally {
+			dbUtil.close(pstmt, rs, conn);
+		}
+		return list;
+	}
+
+	@Override
+	public List<TripDto> loadRandomInfoUseUserDao(String sido_code, String gugun_code) throws SQLException {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<TripDto> list = new ArrayList<>();
+
+		try {
+			conn = dbUtil.getConnection();
+			StringBuilder sql = new StringBuilder(
+					"select * from attraction_info  where CHAR_LENGTH(first_image)>1 and sido_code = ? and gugun_code = ? order BY RAND() LIMIT 32 ");
+			pstmt = conn.prepareStatement(sql.toString());
+			pstmt.setString(1, sido_code);
+			pstmt.setString(2, gugun_code);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				TripDto tripDto = new TripDto();
+				tripDto.setLatitude(rs.getString("latitude"));
+				tripDto.setLongitude(rs.getString("longitude"));
+
 				tripDto.setContentid(rs.getString("content_id"));
 				tripDto.setContenttypeid(rs.getString("content_type_id"));
 				tripDto.setTitle(rs.getString("title"));

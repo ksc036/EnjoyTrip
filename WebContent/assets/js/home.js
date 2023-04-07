@@ -16,11 +16,13 @@ function makeOption(data) {
 // 사진칼럼만들 태그
 let pictureLst = document.getElementById("pictureLst");
 // 랜덤으로 게시글 가져오는 코드
-fetch("./trip?action=loadRandomInfo", { method: "GET" })
+
+
+/*fetch("./trip?action=loadRandomInfo", { method: "GET" })
   .then((response) => response.json())
   .then((data) => {
     makeList(data);
-  });
+  });*/
 
 // 검색버튼 누르기 클릭 이벤트 등록
 document.getElementById("btn-search").addEventListener("click", () => {
@@ -52,7 +54,6 @@ function makeList(data) {
   let trips = data.items; // 배열
   pictureLst.innerHTML = "";
   let pictureLstContent = ``;
-  console.log(trips);
   if (trips.length == 0) {
     let noData = document.createElement("h1");
     noData.textContent = "Content가 없습니다.";
